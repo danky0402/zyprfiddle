@@ -1,0 +1,38 @@
+{
+  "Id": "da.vfyelkhmza217ertyewnt",
+  "Timestamp": "2025-03-27T22:50:23Z",
+  "UserId": "fd47950a-cd22-41a5-b3a3-6f8e3ebccfae",
+  "StatusNbr": 4,
+  "StatusDescription": "Request added to simulator queue",
+  "Settings": null,
+  "SimulationStates": [
+    {
+      "StatusTimestamp": "2025-03-27T22:50:23Z",
+      "StatusNbr": 4,
+      "Message": "Request added to simulator queue"
+    },
+    {
+      "StatusTimestamp": "2025-03-27T22:50:23Z",
+      "StatusNbr": 3,
+      "Message": "Model validation succeeded"
+    },
+    {
+      "StatusTimestamp": "2025-03-27T22:50:23Z",
+      "StatusNbr": 2,
+      "Message": "Request started"
+    },
+    {
+      "StatusTimestamp": "2025-03-27T22:50:23Z",
+      "StatusNbr": 1,
+      "Message": "Received request"
+    }
+  ],
+  "Progress": null,
+  "ResourceRequirementsForecast": null,
+  "CalendarizedForecast": null,
+  "Calendars": null,
+  "NoSolutionGraphs": null,
+  "Errors": null,
+  "ValidationPassed": null,
+  "ValidationResults": null
+}

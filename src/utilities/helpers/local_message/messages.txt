@@ -1,0 +1,6 @@
+Healthcheck status: 200 
+
+Get zypr api key: Success 
+
+Progress(Started=True, Completed=True, PercentComplete=100, TransactionCount=4300, SequenceCount=2528253) 
+

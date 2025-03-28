@@ -1,0 +1,278 @@
+{
+    "Settings": {
+        "ScenarioName": "VMware Term Change",
+        "ModelEffectiveDate": "2025-01-01",
+        "CalendarizeForecast": true,
+        "DataValidationCascadeMode": "Stop",
+        "EmailResults": true,
+        "Pool": {
+            "Id": "MSP-1",
+            "Name": "RedHat OS",
+            "Description": "RedHat OS HA"
+        }
+    },
+    "SimulationRules": {
+        "SimulationCostScope": "All",
+        "SimulationType": "Optimal",
+        "ScenarioDuration": 5.5,
+        "FindSolutionByMetric": "TotalCumulativeCostPerYear",
+        "ServerReplacementTime": 5
+    },
+    "EvolutionRules": {
+        "PoolUtilizationPercentCurrent": 70,
+        "PoolUtilizationBoundaryPercentLower": 68.5,
+        "PoolUtilizationBoundaryPercentUpper": 71.5,
+        "ServiceDemandGrowthPercent": 5,
+        "InventoryQueueBias": "Auto"
+    },
+    "NewServerConfiguration": {
+        "ServerPerf": 1600,
+        "ServerCost": 10000,
+        "ServerWatts": 450,
+        "ProcessorSetSize": 2,
+        "CoreSetSize": 32,
+        "ServerSize": 2
+    },
+    "PowerConsumptionTerms": {
+        "PoolPowerDrawPercent": 80,
+        "DatacenterPowerkWhCostRate": 0.115,
+        "DatacenterPue": 1.4,
+        "PowerCostInflationPercent": 2.5
+    },
+    "FacilityConsumptionTerms": {
+        "PowerConsumptionMarkupPercent": 0,
+        "FacilitySpaceUnitCost": 65,
+        "UnitCostInflationPercent": 2.75
+    },
+    "ValuationRules": {
+        "DiscountPercent": 10.0,
+        "IncludeServerResidualValue": false,
+        "ResidualValueBidAskSpreadPercent": 40,
+        "InitialServerInventoryIsNew": false
+    },
+    "SoftwareResources": {
+        "PoolSoftwareStack": [
+            1,
+            2
+        ],
+        "SoftwareInventoryTerms": [
+            {
+                "LicenseId": 1,
+                "LicenseMetric": "Processor",
+                "LicenseClass": "Perpetual",
+                "ContractType": "Coterminous",
+                "ContractTerms": {
+                    "AnniversaryDate": "2025-06-30",
+                    "TermLength": 3,
+                    "CreateSettlementCalendar": "Union",
+                    "RenewalSchedule": "Contract",
+                    "AttemptPositionReset": false,
+                    "CostRules": []
+                },
+                "Fee": 2000,
+                "PerpetualSupportPercent": 25,
+                "InitialPosition": null,
+                "ConsumptionRules": {
+                    "Operator": "Or",
+                    "Rules": [
+                        {
+                            "Id": "1",
+                            "RequiredLicenseQty": 1,
+                            "MetricName": "CoreSetSize",
+                            "Operator": "LessThanOrEqual",
+                            "TargetValue": 32
+                        },
+                        {
+                            "Id": "2",
+                            "RequiredLicenseQty": 2,
+                            "MetricName": "CoreSetSize",
+                            "Operator": "GreaterThan",
+                            "TargetValue": 32
+                        }
+                    ]
+                }
+            },
+            {
+                "LicenseId": 2,
+                "LicenseMetric": "Server",
+                "LicenseClass": "Subscription",
+                "ContractType": "Coterminous",
+                "ContractTerms": {
+                    "AnniversaryDate": "2026-10-31",
+                    "TermLength": 3,
+                    "TrueUpMonth": 6,
+                    "CreateSettlementCalendar": "Custom",
+                    "RenewalSchedule": "Contract",
+                    "AttemptPositionReset": false,
+                    "CostRules": []
+                },
+                "Fee": 2000,
+                "InitialPosition": null,
+                "ConsumptionRules": {
+                    "Operator": "Or",
+                    "Rules": [
+                        {
+                            "Id": "1",
+                            "Operator": "Or",
+                            "RequiredLicenseQty": 1,
+                            "Rules": [
+                                {
+                                    "Id": "1.1",
+                                    "MetricName": "ProcessorSetSize",
+                                    "Operator": "Equal",
+                                    "TargetValue": 1
+                                },
+                                {
+                                    "Id": "1.2",
+                                    "MetricName": "ProcessorSetSize",
+                                    "Operator": "Equal",
+                                    "TargetValue": 2
+                                }
+                            ]
+                        },
+                        {
+                            "Id": "2",
+                            "RequiredLicenseQty": 2,
+                            "MetricName": "ProcessorSetSize",
+                            "Operator": "Equal",
+                            "TargetValue": 4
+                        },
+                        {
+                            "Id": "3",
+                            "RequiredLicenseQty": 4,
+                            "MetricName": "ProcessorSetSize",
+                            "Operator": "Equal",
+                            "TargetValue": 8
+                        }
+                    ]
+                }
+            },
+            {
+                "LicenseId": 3,
+                "LicenseMetric": "Core",
+                "LicenseClass": "Subscription",
+                "ContractType": "Coterminous",
+                "ContractTerms": {
+                    "AnniversaryDate": "2027-06-30",
+                    "TermLength": 4,
+                    "TrueUpMonth": 6,
+                    "CreateSettlementCalendar": "Custom",
+                    "RenewalSchedule": "Contract",
+                    "AttemptPositionReset": false,
+                    "CostRules": []
+                },
+                "Fee": 325,
+                "InitialPosition": null
+            }
+        ]
+    },
+    "ServerInventory": [
+        {
+            "ServerQty": 20,
+            "ServerPerf": 1460,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 32,
+            "InitialAge": 0.5,
+            "ServerSize": 2
+        },
+        {
+            "ServerQty": 20,
+            "ServerPerf": 1310,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 32,
+            "InitialAge": 1.5,
+            "ServerSize": 2
+        },
+        {
+            "ServerQty": 30,
+            "ServerPerf": 900,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 24,
+            "InitialAge": 2.5,
+            "ServerSize": 2
+        },
+        {
+            "ServerQty": 40,
+            "ServerPerf": 550,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 16,
+            "InitialAge": 3.5,
+            "ServerSize": 2
+        },
+        {
+            "ServerQty": 40,
+            "ServerPerf": 500,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 16,
+            "InitialAge": 4.5,
+            "ServerSize": 2
+        }
+    ],
+    "JumpEvents": [
+        {
+            "EventId": 1,
+            "EventType": "SoftwareTermsChange",
+            "TriggerTime": 0.5,
+            "TermChangeMap": {
+                "RemoveLicenseId": 1,
+                "AddLicenseId": 3
+            }
+        },
+        {
+            "EventId": 2,
+            "EventType": "Performance",
+            "TriggerTime": 1.5,
+            "PerformanceJumpPercent": 20,
+            "PerformanceType": "Server"
+        },
+        {
+            "EventId": 3,
+            "EventType": "Configuration",
+            "TriggerTime": 1.5,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 32,
+            "ServerCost": 18500,
+            "ServerSize": 2
+        },
+        {
+            "EventId": 4,
+            "EventType": "Performance",
+            "TriggerTime": 3.00,
+            "PerformanceJumpPercent": 20,
+            "PerformanceType": "Server"
+        },
+        {
+            "EventId": 5,
+            "EventType": "Configuration",
+            "TriggerTime": 3.0,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 32,
+            "ServerCost": 19500,
+            "ServerSize": 2
+        },
+        {
+            "EventId": 6,
+            "EventType": "Performance",
+            "TriggerTime": 4.5,
+            "PerformanceJumpPercent": 20,
+            "PerformanceType": "Server"
+        },
+        {
+            "EventId": 7,
+            "EventType": "Configuration",
+            "TriggerTime": 4.5,
+            "ServerWatts": 450,
+            "ProcessorSetSize": 2,
+            "CoreSetSize": 32,
+            "ServerCost": 20500,
+            "ServerSize": 2
+        }
+    ]
+}
