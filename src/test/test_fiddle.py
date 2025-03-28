@@ -16,7 +16,7 @@ Message.Clear()
 # _content = {"Item" : "value" }
 # File.Save(file_path, json.dumps(_content))
 
-# local_filepath = "src\\test\\content\\scenario_first_response_obj.json"
+# local_filepath = "src\\test\\content\\output_scenarios\\partials\\scenario_first_response_obj.json"
 # filepath = os.path.join(os.getcwd(), local_filepath)
 # scenario_response_dict = File.Read('d', filepath)
 
@@ -37,12 +37,14 @@ Message.Post(str(record.Progress))
 # print(type(_t))
 # print("Key: " + str(_t["ZyprApiKey"]))
 
-local_filepath = "src\\test\\content\\neutral.json"
+local_filepath = "src\\test\\content\\input_models\\neutral.json"
 filepath = os.path.join(os.getcwd(), local_filepath)
 poolModel = File.Read('j', filepath, False, "Read pool model neutral.json")
 Message.Post("Pool Model Type is: " + str(type(poolModel)))
 simulation = Simulation()
 scenario = simulation.Execute(poolModel)
+
+
 
 Message.Post(str(scenario.Id))
 
