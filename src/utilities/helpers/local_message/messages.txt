@@ -1,6 +1,13 @@
 Healthcheck status: 200 
 
+Read pool model neutral.json: Success 
+
+Pool Model Type is: <class 'str'> 
+
 Get zypr api key: Success 
 
-Progress(Started=True, Completed=True, PercentComplete=100, TransactionCount=4300, SequenceCount=2528253) 
+Id: da.ih2oq49j3qpemvwwda1nz 
+Status: Request added to simulator queue 
+
+Get zypr api key: Success 
 

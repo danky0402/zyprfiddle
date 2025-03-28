@@ -12,16 +12,29 @@ class Simulation():
                      
     _base_url: str = "https://api.zypr.app/v1/simulations"
   
-    
+    # intended as a local private method (by naming convention use the "__")
+    def __PostMessage(scenario):
+            
+            Message.Post(f"Status Nbr: {str(scenario.StatusNBr)} \n"
+                        f"Status: {str(scenario.StatusDescription)} \n" 
+                        f"Started: {str(scenario.Progress.Started)} \n"
+                        f"Completed: {str(scenario.Progress.Completed)} \n"
+                        f"Percent Complete: {str(scenario.Progress.PercentComplete)} \n"
+                        f"Transaction Count: {str(scenario.Progress.TransactionCount)} \n"
+                        f"Percent Complete: {str(scenario.Progress.SequenceCount)}"
+                        )
 
-
+    # a public method
     @classmethod
-    def Execute(cls, poolModel, tag:Optional[str] = None):
-        
+    def Execute(cls, poolModel, tag:Optional[str] = None):                          # the tag parameter is a query string parameter
+                                                                                    # use it to tag a group of simulations with the 
+                                                                                    # same identifier (e.g., sensitivity_test_1) 
+                                                                                    
         url = cls._base_url
 
         if tag is not None and len(tag) > 0:    
-            url = urljoin(cls._base_url, f"?tag={tag}")
+            tag = tag.replace(" ", "_")                                             # replace any whitespace with "_"
+            url = urljoin(cls._base_url, f"?tag={tag}")                             # the tag opt
         
         try:
             apikey = ApplicationSettings.GetZyprApiKey()
@@ -70,9 +83,8 @@ class Simulation():
 
                     time.sleep(5)                                                   # suspends execution for 5 seconds, then continues
 
-                    response = cls.GetScenarioRecord(scenario.Id)
-                    scenario = Deserialize.Scenario(response.json())
-                    PostMessage(scenario)                                           # call local PostMethod method to post same info
+                    scenario = cls.GetScenarioRecord(scenario.Id)                   # returned response is a scenario obj
+                    cls.__PostMessage(scenario)                                       # call local PostMethod method to post same info
                     
                     if scenario.StatusNbr >= 7:                                     # simulator reaches successful completion
                        _loop = False                                                # terminates the loop
@@ -82,17 +94,9 @@ class Simulation():
         except Exception as e:
             Message.Post(f"Read file error: {e}")
             print(f"Error: {e}")                                                    # print error to terminal
+            return None
 
-        def PostMessage(scenario):
-               
-                Message.Post(f"Status Nbr: {str(scenario.StatusNBr)} \n"
-                            f"Status: {str(scenario.StatusDescription)} \n" 
-                            f"Started: {str(scenario.Progress.Started)} \n"
-                            f"Completed: {str(scenario.Progress.Completed)} \n"
-                            f"Percent Complete: {str(scenario.Progress.PercentComplete)} \n"
-                            f"Transaction Count: {str(scenario.Progress.TransactionCount)} \n"
-                            f"Percent Complete: {str(scenario.Progress.SequenceCount)}"
-                            )
+    
 
     @classmethod
     def GetScenarioRecord(cls, id: str):

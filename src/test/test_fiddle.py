@@ -27,11 +27,11 @@ Message.Clear()
 _r = HealthCheck()
 _response = _r.Get()
 
-scenarioId = "da.xkauzkkt3n7dhnknwjhjh"
-simulation = Simulation()
-record = simulation.GetScenarioRecord(scenarioId)
+# scenarioId = "da.xkauzkkt3n7dhnknwjhjh"
+# simulation = Simulation()
+# record = simulation.GetScenarioRecord(scenarioId)
 
-Message.Post(str(record.Progress))
+# Message.Post(str(record.Progress))
 
 # _t = { "ZyprApiKey": "Z.1G9sJ8am7qmT4xSKDvgQOYtPDjIJvn0Pl6z"}
 # print(type(_t))
