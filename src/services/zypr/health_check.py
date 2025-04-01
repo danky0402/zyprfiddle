@@ -1,6 +1,6 @@
 import pip._vendor.requests as requests
 from urllib.parse import urljoin
-from src.utilities.helpers.local_message.message import Message
+from src.helpers.local_message.message import Message
 
 # no apikey is required
 
@@ -17,7 +17,7 @@ class HealthCheck():
         if(int(response.status_code) == 200):
             Message.Post(f"Healthcheck status: {response.status_code}")
         
-        return response.status_code
+        return int(response.status_code)
         
 
 

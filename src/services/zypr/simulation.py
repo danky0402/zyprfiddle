@@ -3,26 +3,32 @@ import pip._vendor.requests as requests
 from urllib.parse import urljoin
 from typing import Optional
 
-from src.utilities.helpers.deserializers.deserializer import Deserialize
-from src.utilities.helpers.local_message.message import Message
-from src.utilities.helpers.application_settings import ApplicationSettings
-from src.utilities.helpers.file_operations.file_operation import File
+from src.helpers.deserializers.deserializer import Deserialize
+from src.helpers.local_message.message import Message
+from src.helpers.misc.application_settings import ApplicationSettings
+from src.helpers.misc.file_operation import File
 
 class Simulation():
-                     
     _base_url: str = "https://api.zypr.app/v1/simulations"
   
+     
     # intended as a local private method (by naming convention use the "__")
-    def __PostMessage(scenario):
+    def __PostStateMessage(scenario, isFirst = False):
             
-            Message.Post(f"Status Nbr: {str(scenario.StatusNBr)} \n"
-                        f"Status: {str(scenario.StatusDescription)} \n" 
-                        f"Started: {str(scenario.Progress.Started)} \n"
-                        f"Completed: {str(scenario.Progress.Completed)} \n"
-                        f"Percent Complete: {str(scenario.Progress.PercentComplete)} \n"
-                        f"Transaction Count: {str(scenario.Progress.TransactionCount)} \n"
-                        f"Percent Complete: {str(scenario.Progress.SequenceCount)}"
-                        )
+            if isFirst is True:
+                _sorted = sorted(scenario.SimulationStates, key=lambda event: event.StatusNbr)                                  # initial states may occur very quickly
+                for state in _sorted:                                                                                           # so don't skip, iterate over all on first posting        
+                     Message.Post(f"Status Nbr:  {str(state.StatusNbr)} \n"
+                                  f"Message:  {str(state.Message)} \n"
+                                  f"Timestamp:  {str(state.StatusTimestamp)}"
+                                 )
+
+            else:
+                current_state = sorted(scenario.SimulationStates, key=lambda event: event.StatusTimestamp, reverse=True)[0]     # taking first state in ordered list
+                Message.Post(f"Status Nbr:  {str(current_state.StatusNbr)} \n"                                                  # first record is the newest per timestamp
+                             f"Message:  {str(current_state.Message)} \n"
+                             f"Timestamp:  {str(current_state.StatusTimestamp)} \n"
+                            )
 
     # a public method
     @classmethod
@@ -43,7 +49,8 @@ class Simulation():
             
             response = requests.post(url, headers=headers, data=poolModel)
             
-            if response.status_code != 200:
+            
+            if int(response.status_code) != 200:
                 Message.Post(f"Error: {response.status_code}")
                 return response
 
@@ -51,22 +58,20 @@ class Simulation():
                                                                                     # python dictionary using the key to return the value:  scenario["Id"], or scenario["StatusNbr"]    
 
 
-            response_json = response.json() # returns python dictionary or list
+            response_dict = response.json()                                         # returns python dictionary or list
 
                                                                                     # file_path = os.path.join(str(os.getcwd()), "src", "test", "content", "scenario_first_response_obj.json")
                                                                                     # File.Save(file_path, response.text, False)
 
-            scenario = Deserialize.Scenario(response_json)                          # deserializing is essentially casting the entire response object
-                                                                                    # from a JSON string (readable as a python dictionary) into a  
-                                                                                    # custom "Zypr" Scenario object, which is accessible via
+            scenario = Deserialize.Scenario(response_dict)                          # deserializing is essentially casting the python dict (i.e., a key-value pair)
+                                                                                    # into a custom "Zypr" Scenario object, which is accessible via
                                                                                     # dot syntax (i.e., scenario.xxxx.xxxx).  With a list in the  
                                                                                     # object graph, like: scenario.HardwareInventory[0].IntervalNbr 
                                                                                     # where HardwareInventory is the list and [0] refers to the 
                                                                                     # first item in its list
                                                                 
            
-            Message.Post(f"Id: {str(scenario.Id)} \n"
-                         f"Status: {str(scenario.StatusDescription)}")
+            cls.__PostStateMessage(scenario, True)                                  # first status posting
 
             if scenario.StatusNbr > 7:                                              # check if first response contains an error
                                                                                     # if this was a dictionary cast to integer for comparison 
@@ -76,21 +81,25 @@ class Simulation():
                 
             else:
                                                                                     
-                _loop = True                                                        # set initial state of while loop
+                loop = True                                                        # set initial state of while loop
                                                                                     # enter into a while loop to and continue while _loop is true 
                                                                                     # this loop is to check (i.e., poll) the running status of the simulation
-                while _loop: 
+                while loop: 
 
-                    time.sleep(5)                                                   # suspends execution for 5 seconds, then continues
+                    time.sleep(3)                                                   # suspends execution for 5 seconds, then continues
 
-                    scenario = cls.GetScenarioRecord(scenario.Id)                   # returned response is a scenario obj
-                    cls.__PostMessage(scenario)                                       # call local PostMethod method to post same info
+                    response = cls.GetScenarioRecord(scenario.Id, True)             # returned response is the text response (json) - suppress Get zypr api key message
+                    scenario = Deserialize.Scenario(response.json())                # convet to a python dictionary then deserialize into a custom scenario object
+                    
+                    cls.__PostStateMessage(scenario)                                # call local PostMethod method to post same info
                     
                     if scenario.StatusNbr >= 7:                                     # simulator reaches successful completion
-                       _loop = False                                                # terminates the loop
+                       loop = False                                                 # terminates the loop
 
-            return scenario
-
+            
+            return response
+                
+            
         except Exception as e:
             Message.Post(f"Read file error: {e}")
             print(f"Error: {e}")                                                    # print error to terminal
@@ -99,19 +108,19 @@ class Simulation():
     
 
     @classmethod
-    def GetScenarioRecord(cls, id: str):
+    def GetScenarioRecord(cls, id: str, suppressMsg=False):
         
-        apikey = ApplicationSettings.GetZyprApiKey()
+        apikey = ApplicationSettings.GetZyprApiKey(suppressMsg)
         headers = {"Content-Type": "application/json",
                    "x-api-key": f"{apikey}" }
         
         url = f"{cls._base_url}/{id}"
 
         response = requests.get(url, headers=headers)
-        
-        obj = response.json()
-
-        return Deserialize.Scenario(obj)
+       
+        return response
+     
+    
 
 
     @classmethod
@@ -132,7 +141,7 @@ class Simulation():
         url = urljoin(cls._base_url, relative_url)
 
         response = requests.get(url, headers=headers, params=queryString)
-
+        return response
 
     @classmethod
     def DeleteScenario(cls, mode:str, qsValue):   # valid mode is "id" or "tag"
@@ -146,8 +155,11 @@ class Simulation():
         url = cls._base_url
                 
         response = requests.delete(url, headers=headers, params=params)
-        msg = response.json()
-        Message.Post(f"Http Status Code: {response.status_code} \n"
-                     f"Message: {msg}" )
         
-        return Deserialize.Scenario(msg)
+        return response
+
+        # msg = response.json()
+        # Message.Post(f"Http Status Code: {response.status_code} \n"
+        #              f"Message: {msg}" )
+        
+        # return Deserialize.Scenario(msg)
