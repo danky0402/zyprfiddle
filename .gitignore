@@ -175,5 +175,5 @@ cython_debug/
 
 
 # folders to exclude
-src/test/*
-content/secrets/*
+src/test/
+content/secrets/
