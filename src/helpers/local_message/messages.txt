@@ -1,2 +1,57 @@
 Healthcheck status: 200 
 
+Get zypr api key: Success 
+
+Http status code:  200 
+
+Scenario count: 4 
+
+[
+    {
+        "Id": "da.fov6u0mkjfkiuv1bwekor",
+        "CreatedDate": "2025-03-30 02:35:15 +0",
+        "ModelEffectiveDate": "2025-01-01 00:00:00 +0",
+        "StatusNbr": 7,
+        "StatusDescription": "Simulator completed",
+        "ScenarioName": "VMwareTermChange",
+        "PoolId": "MSP-1",
+        "PoolName": "RedHatOS",
+        "CreatedBy": "fd47950a-cd22-41a5-b3a3-6f8e3ebccfae"
+    },
+    {
+        "Id": "da.gjjdqm1np8q78t11jtycb",
+        "CreatedDate": "2025-03-30 02:08:56 +0",
+        "ModelEffectiveDate": "2025-01-01 00:00:00 +0",
+        "StatusNbr": 7,
+        "StatusDescription": "Simulator completed",
+        "ScenarioName": "VMwareTermChange",
+        "PoolId": "MSP-1",
+        "PoolName": "RedHatOS",
+        "CreatedBy": "fd47950a-cd22-41a5-b3a3-6f8e3ebccfae"
+    },
+    {
+        "Id": "da.uhmg4sw1tnd7ebtoihosy",
+        "CreatedDate": "2025-03-30 02:06:02 +0",
+        "ModelEffectiveDate": "2025-01-01 00:00:00 +0",
+        "StatusNbr": 7,
+        "StatusDescription": "Simulator completed",
+        "ScenarioName": "VMwareTermChange",
+        "PoolId": "MSP-1",
+        "PoolName": "RedHatOS",
+        "CreatedBy": "fd47950a-cd22-41a5-b3a3-6f8e3ebccfae"
+    },
+    {
+        "Id": "da.c7vhhrp19u1dwxtemciyd",
+        "CreatedDate": "2025-03-30 02:04:53 +0",
+        "ModelEffectiveDate": "2025-01-01 00:00:00 +0",
+        "StatusNbr": 7,
+        "StatusDescription": "Simulator completed",
+        "ScenarioName": "VMwareTermChange",
+        "PoolId": "MSP-1",
+        "PoolName": "RedHatOS",
+        "CreatedBy": "fd47950a-cd22-41a5-b3a3-6f8e3ebccfae"
+    }
+] 
+
+End 
+

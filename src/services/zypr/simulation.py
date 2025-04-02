@@ -1,4 +1,4 @@
-import time, json, os
+import time
 import pip._vendor.requests as requests
 from urllib.parse import urljoin
 from typing import Optional
@@ -135,10 +135,8 @@ class Simulation():
               return
         
         # requests library docs say a querystring of None will not be added to url's query string 
-
-        relative_url = "search"
         
-        url = urljoin(cls._base_url, relative_url)
+        url = f"{cls._base_url}/search"
 
         response = requests.get(url, headers=headers, params=queryString)
         return response
@@ -146,20 +144,28 @@ class Simulation():
     @classmethod
     def DeleteScenario(cls, mode:str, qsValue):   # valid mode is "id" or "tag"
 
-        apikey = ApplicationSettings.GetZyprApiKey()
-        headers = {"Content-Type": "application/json",
-                   "x-api-key": f"{apikey}" }
-            
-        params = f"{ {mode} : {qsValue} }"
+        try:
 
-        url = cls._base_url
+            apikey = ApplicationSettings.GetZyprApiKey()
+            headers = {"Content-Type": "application/json",
+                    "x-api-key": f"{apikey}" }
                 
-        response = requests.delete(url, headers=headers, params=params)
-        
-        return response
+            params = f"{ {mode} : {qsValue} }"
 
-        # msg = response.json()
-        # Message.Post(f"Http Status Code: {response.status_code} \n"
-        #              f"Message: {msg}" )
-        
-        # return Deserialize.Scenario(msg)
+            url = cls._base_url
+                    
+            response = requests.delete(url, headers=headers, params=params)
+            
+            if int(response.status_code) != 200:
+                Message.Post(f"Error: {response.status_code}")
+                return response
+            
+            Message.Post(f"Http response:  {response.status_code}")
+            print(response.text)    # alternative output as backup for new api-key 
+            return response
+
+        except Exception as e:
+            Message.Post(f"Delete scenario error: {e}")
+            print(f"Error: {e}")                                                   
+            return None
+

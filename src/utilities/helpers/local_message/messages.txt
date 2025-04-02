@@ -1,4 +1,0 @@
-Healthcheck status: 200 
-
-Zypr health check success: 200 
-

@@ -1,4 +1,5 @@
 import pip._vendor.requests as requests
+import json
 
 from src.helpers.misc.application_settings import ApplicationSettings
 from src.helpers.local_message.message import Message
@@ -48,21 +49,19 @@ class Utility():
             apikey = ApplicationSettings.GetZyprApiKey()
             headers = {"Content-Type": "application/json",
                     "x-api-key": f"{apikey}" }
-            queryString = f"{'code' : '{code}', 'version' : {version}}"
             
-            response = requests.get(url, headers=headers, params=queryString)
+            queryStringAsDictionary = dict(code=code,version=version)                       #  a single key-value pair (query string) defined as a python dictionary
+           
+            response = requests.get(url, headers=headers, params=queryStringAsDictionary)
         
             if int(response.status_code) != 200:
                 Message.Post(f"Error: {response.status_code}")
                 return response
 
             # output to both because the response confirms user deletion
-            Message.Post(response)
-            print(str(response))
+            Message.Post(f"Http response:  {response.status_code}")
             
             return response
-
-
 
         except Exception as e:
             Message.Post(f"Critical error: {e}")
