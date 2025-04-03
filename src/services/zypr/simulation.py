@@ -8,6 +8,7 @@ from src.helpers.local_message.message import Message
 from src.helpers.misc.application_settings import ApplicationSettings
 from src.helpers.misc.file_operation import File
 
+
 class Simulation():
     _base_url: str = "https://api.zypr.app/v1/simulations"
   

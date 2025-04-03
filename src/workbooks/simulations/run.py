@@ -2,19 +2,19 @@ import json, os, datetime
 
 from src.helpers.local_message.message import Message
 from src.helpers.deserializers.deserializer import Deserialize
-from src.helpers.file_operations.file_operation import File
-from src.services.zypr.health_check import HealthCheck
+from src.helpers.misc.file_operation import File
 from src.services.zypr.simulation import Simulation
-
-
+from src.services.zypr.utility import Utility
 
 Message.Clear()
 
 
+
 #   1. check zypr is available
-hc = HealthCheck()
-status_code = hc.Get()
-if int(status_code) != 200:                                                                             #  explicitly cast status_code to an integer type for comparison
+
+utility  = Utility()
+status_code = utility.HealthCheck()
+if status_code != 200:
     Message.Post( f"Zypr health check failed with status code: {str(status_code)}")
     quit()
 
@@ -46,7 +46,8 @@ if int(scenario_dict["StatusNbr"]) > 7:                                         
 #   6. creates file name with this structure:  "name"_"timestamp"_"scenario id (partial)"             
 ts = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")                                              # create file timestamp value
 sid = str(scenario_dict["Id"])[:7]                                                                      # use first 7 digits of scenario id
-write_local_filepath = f"src\\test\\content\\output_scenarios\\completed\\neutral_{ts}_{sid}.json"      # place into your preferred folder structure
+#write_local_filepath = f"src\\test\\content\\output_scenarios\\completed\\neutral_{ts}_{sid}.json"      # place into your preferred folder structure
+write_local_filepath = f"content\\output_scenarios\\completed\\neutral_{ts}_{sid}.json" 
 filepath = os.path.join(os.getcwd(), write_local_filepath)
 File.Save(filepath, str(response.text)) 
 Message.Post(str(scenario_dict["Id"]))
