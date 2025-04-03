@@ -47,7 +47,7 @@ print(type(name_dict))
 # convert python dictionary to json string
 back_to_json = json.dumps(name_dict)
 print(back_to_json)
-
+print(type(back_to_json))
 
 
 variable1 = "value1"

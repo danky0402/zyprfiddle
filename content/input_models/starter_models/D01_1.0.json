@@ -1,29 +1,22 @@
-Healthcheck status: 200 
-
-Get zypr api key: Success 
-
-Http response:  200 
-
 {
     "Settings": {
         "Pool": {
-            "Id": "U01",
+            "Id": "D01",
             "Name": "Name of pool",
             "Description": "Long description of pool"
         },
         "EmailResults": true,
-        "ScenarioName": "Increase pool utilization",
+        "ScenarioName": "Modify service demand growth percentage",
         "ModelEffectiveDate": "2023-01-01",
         "CalendarizeForecast": true
     },
     "JumpEvents": [
         {
             "EventId": "1",
-            "EventType": "UtilizationBoundaries",
-            "TriggerTime": 1.2,
-            "RemoveServers": false,
-            "PoolUtilizationBoundaryPercentLower": 65,
-            "PoolUtilizationBoundaryPercentUpper": 70
+            "EventType": "Demand",
+            "DemandType": "GrowthPercent",
+            "TriggerTime": 1.25,
+            "DemandPercent": 30
         },
         {
             "EventId": "2",
@@ -231,9 +224,4 @@ Http response:  200
         "UnitCostInflationPercent": 2.75,
         "PowerConsumptionMarkupPercent": 0
     }
-} 
-
-Save file success 
-
-End 
-
+}

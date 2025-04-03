@@ -1,65 +1,25 @@
-Healthcheck status: 200 
-
-Get zypr api key: Success 
-
-Http response:  200 
-
 {
     "Settings": {
         "Pool": {
-            "Id": "U01",
+            "Id": "S04",
             "Name": "Name of pool",
             "Description": "Long description of pool"
         },
         "EmailResults": true,
-        "ScenarioName": "Increase pool utilization",
+        "ScenarioName": "Modify a software price",
         "ModelEffectiveDate": "2023-01-01",
         "CalendarizeForecast": true
     },
     "JumpEvents": [
         {
+            "Fee": 550,
             "EventId": "1",
-            "EventType": "UtilizationBoundaries",
-            "TriggerTime": 1.2,
-            "RemoveServers": false,
-            "PoolUtilizationBoundaryPercentLower": 65,
-            "PoolUtilizationBoundaryPercentUpper": 70
-        },
-        {
-            "EventId": "2",
-            "EventType": "Configuration",
-            "ServerCost": 14000,
-            "ServerSize": 2,
-            "CoreSetSize": 48,
-            "ServerWatts": 420,
-            "TriggerTime": 1.5,
-            "ProcessorSetSize": 2
-        },
-        {
-            "EventId": "3",
-            "EventType": "Performance",
-            "TriggerTime": 1.5,
-            "PerformanceType": "Server",
-            "PerformanceJumpPercent": 88.6
-        },
-        {
-            "EventId": "4",
-            "EventType": "Configuration",
-            "ServerCost": 15000,
-            "ServerSize": 2,
-            "CoreSetSize": 64,
-            "ServerWatts": 450,
-            "TriggerTime": 3.5,
-            "ProcessorSetSize": 2
-        },
-        {
-            "EventId": "5",
-            "EventType": "Performance",
-            "TriggerTime": 3.5,
-            "PerformanceType": "Server",
-            "PerformanceJumpPercent": 66.7
+            "EventType": "SoftwarePriceChange",
+            "LicenseId": 3,
+            "TriggerTime": 1.5
         }
     ],
+    "Constraints": [],
     "EvolutionRules": {
         "InventoryQueueBias": "Auto",
         "ServiceDemandGrowthPercent": 25,
@@ -231,9 +191,4 @@ Http response:  200
         "UnitCostInflationPercent": 2.75,
         "PowerConsumptionMarkupPercent": 0
     }
-} 
-
-Save file success 
-
-End 
-
+}

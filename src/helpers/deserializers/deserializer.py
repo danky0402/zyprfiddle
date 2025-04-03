@@ -8,8 +8,8 @@ class Deserialize:
     def Scenario(value, *args): 
         return Scenario(value, args)
     
-    def SearchScenarioSummaries(value): 
-        return SearchScenarioSummaries(value)
+    # def SearchScenarioSummaries(value): 
+    #     return SearchScenarioSummaries(value)
 
     #   add other methods as necessary
 

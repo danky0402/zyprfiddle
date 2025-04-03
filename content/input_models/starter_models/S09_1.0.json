@@ -1,29 +1,23 @@
-Healthcheck status: 200 
-
-Get zypr api key: Success 
-
-Http response:  200 
-
 {
     "Settings": {
         "Pool": {
-            "Id": "U01",
+            "Id": "S09",
             "Name": "Name of pool",
             "Description": "Long description of pool"
         },
         "EmailResults": true,
-        "ScenarioName": "Increase pool utilization",
+        "ScenarioName": "Remove software from stack",
         "ModelEffectiveDate": "2023-01-01",
         "CalendarizeForecast": true
     },
     "JumpEvents": [
         {
             "EventId": "1",
-            "EventType": "UtilizationBoundaries",
-            "TriggerTime": 1.2,
-            "RemoveServers": false,
-            "PoolUtilizationBoundaryPercentLower": 65,
-            "PoolUtilizationBoundaryPercentUpper": 70
+            "EventType": "SoftwareStackRemove",
+            "LicenseIds": [
+                2
+            ],
+            "TriggerTime": 0.5
         },
         {
             "EventId": "2",
@@ -170,45 +164,37 @@ Http response:  200
         ],
         "SoftwareInventoryTerms": [
             {
-                "Fee": 2000,
+                "Fee": 100,
                 "LicenseId": 1,
+                "ContractType": "Coterminous",
+                "LicenseClass": "Subscription",
+                "ContractTerms": {
+                    "CostRules": [],
+                    "TermLength": 3,
+                    "AnniversaryDate": "2024-03-31",
+                    "RenewalSchedule": "Contract",
+                    "AnnualTrueUpMonth": 9,
+                    "CreateSettlementCalendar": "Union"
+                },
+                "LicenseMetric": "Core",
+                "InitialPosition": null
+            },
+            {
+                "Fee": 50,
+                "LicenseId": 2,
                 "ContractType": "Coterminous",
                 "LicenseClass": "Perpetual",
                 "ContractTerms": {
                     "CostRules": [],
                     "TermLength": 3,
-                    "AnniversaryDate": "2024-10-31",
+                    "AnniversaryDate": "2025-06-01",
                     "RenewalSchedule": "Contract",
-                    "AttemptPositionReset": false,
+                    "AnnualTrueUpMonth": 9,
                     "CreateSettlementCalendar": "Union"
                 },
-                "LicenseMetric": "Processor",
-                "InitialPosition": null,
+                "LicenseMetric": "Core",
+                "InitialPosition": 0,
                 "PerpetualSupportPercent": 25
-            },
-            {
-                "Fee": 4000,
-                "LicenseId": 2,
-                "ContractType": "Coterminous",
-                "LicenseClass": "Subscription",
-                "ContractTerms": {
-                    "CostRules": [],
-                    "TermLength": 3,
-                    "TrueUpMonth": 6,
-                    "AnniversaryDate": "2025-03-31",
-                    "RenewalSchedule": "TrueUp",
-                    "AttemptPositionReset": false,
-                    "CreateSettlementCalendar": "Custom"
-                },
-                "LicenseMetric": "Processor",
-                "InitialPosition": null
-            },
-            {
-                "Fee": 500,
-                "LicenseId": 3,
-                "ContractType": "Instance",
-                "LicenseClass": "Subscription",
-                "LicenseMetric": "Processor"
             }
         ]
     },
@@ -231,9 +217,4 @@ Http response:  200
         "UnitCostInflationPercent": 2.75,
         "PowerConsumptionMarkupPercent": 0
     }
-} 
-
-Save file success 
-
-End 
-
+}

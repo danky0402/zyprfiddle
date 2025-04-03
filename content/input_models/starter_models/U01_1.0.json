@@ -1,9 +1,3 @@
-Healthcheck status: 200 
-
-Get zypr api key: Success 
-
-Http response:  200 
-
 {
     "Settings": {
         "Pool": {
@@ -231,9 +225,4 @@ Http response:  200
         "UnitCostInflationPercent": 2.75,
         "PowerConsumptionMarkupPercent": 0
     }
-} 
-
-Save file success 
-
-End 
-
+}

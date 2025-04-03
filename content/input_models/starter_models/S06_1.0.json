@@ -1,32 +1,18 @@
-Healthcheck status: 200 
-
-Get zypr api key: Success 
-
-Http response:  200 
-
 {
     "Settings": {
         "Pool": {
-            "Id": "U01",
+            "Id": "S06",
             "Name": "Name of pool",
             "Description": "Long description of pool"
         },
         "EmailResults": true,
-        "ScenarioName": "Increase pool utilization",
+        "ScenarioName": "Set software fixed duration fee",
         "ModelEffectiveDate": "2023-01-01",
         "CalendarizeForecast": true
     },
     "JumpEvents": [
         {
             "EventId": "1",
-            "EventType": "UtilizationBoundaries",
-            "TriggerTime": 1.2,
-            "RemoveServers": false,
-            "PoolUtilizationBoundaryPercentLower": 65,
-            "PoolUtilizationBoundaryPercentUpper": 70
-        },
-        {
-            "EventId": "2",
             "EventType": "Configuration",
             "ServerCost": 14000,
             "ServerSize": 2,
@@ -36,14 +22,14 @@ Http response:  200
             "ProcessorSetSize": 2
         },
         {
-            "EventId": "3",
+            "EventId": "2",
             "EventType": "Performance",
             "TriggerTime": 1.5,
             "PerformanceType": "Server",
             "PerformanceJumpPercent": 88.6
         },
         {
-            "EventId": "4",
+            "EventId": "3",
             "EventType": "Configuration",
             "ServerCost": 15000,
             "ServerSize": 2,
@@ -53,7 +39,7 @@ Http response:  200
             "ProcessorSetSize": 2
         },
         {
-            "EventId": "5",
+            "EventId": "4",
             "EventType": "Performance",
             "TriggerTime": 3.5,
             "PerformanceType": "Server",
@@ -175,7 +161,15 @@ Http response:  200
                 "ContractType": "Coterminous",
                 "LicenseClass": "Perpetual",
                 "ContractTerms": {
-                    "CostRules": [],
+                    "CostRules": [
+                        {
+                            "Duration": {
+                                "Schedule": "TrueUp",
+                                "IntervalPercent": 50
+                            },
+                            "LicenseType": "PerpetualSupport"
+                        }
+                    ],
                     "TermLength": 3,
                     "AnniversaryDate": "2024-10-31",
                     "RenewalSchedule": "Contract",
@@ -192,7 +186,14 @@ Http response:  200
                 "ContractType": "Coterminous",
                 "LicenseClass": "Subscription",
                 "ContractTerms": {
-                    "CostRules": [],
+                    "CostRules": [
+                        {
+                            "Rate": {
+                                "Schedule": "TrueUp",
+                                "ChangePercent": 5
+                            }
+                        }
+                    ],
                     "TermLength": 3,
                     "TrueUpMonth": 6,
                     "AnniversaryDate": "2025-03-31",
@@ -231,9 +232,4 @@ Http response:  200
         "UnitCostInflationPercent": 2.75,
         "PowerConsumptionMarkupPercent": 0
     }
-} 
-
-Save file success 
-
-End 
-
+}
