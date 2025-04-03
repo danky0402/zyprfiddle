@@ -49,7 +49,7 @@ Message.Clear()
 
 hc = HealthCheck()
 status_code = hc.Get()
-if status_code is not 200:
+if status_code != 200:
     Message.Post( f"Zypr health check failed with status code: {str(status_code)}")
 
 

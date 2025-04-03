@@ -24,8 +24,8 @@ print(message)
 json_string = '{ "Name" : "Dan" }'
 print(json_string) 
 
-json_string = f'{{ "Name" : "{my_name}" }}'          # user single quote on outside and double quotes around key-value pair
-                                                    # use double braces with f-string to include single braces in string
+json_string = f'{{ "Name" : "{my_name}" }}'             # user single quote on outside and double quotes around key-value pair
+                                                        # use double braces with f-string to include single braces in string
 print(json_string)
 
 json_string_age = '{ "Age" : 30}'
@@ -33,7 +33,7 @@ print(json_string_age)
 
 # python dictionary literal
 
-py_dict = { "Name": "Dan"}                          #   key-value pair enclosed in braces that are not enclosed in quotes
+py_dict = { "Name": "Dan"}                              #   key-value pair enclosed in braces that are not enclosed in quotes
 print("My python dictionary is next")
 print(py_dict)
 print(str())    # print an empty line
@@ -53,6 +53,7 @@ print(back_to_json)
 variable1 = "value1"
 variable2 = "value2"
 s = f'{{"key1": "{variable1}", "key2": "{variable2}"}}'
-d = eval(s)
+d = eval(s)                                             # eval() to set string representation into python dictionary type
 print(type(d))
+print(d)
 # Expected output: {"key1": "value1", "key2": "value2"}
