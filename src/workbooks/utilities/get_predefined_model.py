@@ -8,6 +8,7 @@ from src.services.zypr.user import User
 
 #   1. check zypr is available
 
+ 
 Message.Clear()
 
 utility  = Utility()
