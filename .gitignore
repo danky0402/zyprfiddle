@@ -178,4 +178,3 @@ cython_debug/
 src/test/
 content/secrets/
 src/helpers/local_message/messages.txt
-

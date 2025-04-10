@@ -1,239 +1,72 @@
 Healthcheck status: 200 
 
+Read pool model neutral.json: Success 
+
 Get zypr api key: Success 
 
-Http response:  200 
+Status Nbr:  1 
+Message:  Received request 
+Timestamp:  2025-04-10T16:29:57Z 
 
-{
-    "Settings": {
-        "Pool": {
-            "Id": "U01",
-            "Name": "Name of pool",
-            "Description": "Long description of pool"
-        },
-        "EmailResults": true,
-        "ScenarioName": "Increase pool utilization",
-        "ModelEffectiveDate": "2023-01-01",
-        "CalendarizeForecast": true
-    },
-    "JumpEvents": [
-        {
-            "EventId": "1",
-            "EventType": "UtilizationBoundaries",
-            "TriggerTime": 1.2,
-            "RemoveServers": false,
-            "PoolUtilizationBoundaryPercentLower": 65,
-            "PoolUtilizationBoundaryPercentUpper": 70
-        },
-        {
-            "EventId": "2",
-            "EventType": "Configuration",
-            "ServerCost": 14000,
-            "ServerSize": 2,
-            "CoreSetSize": 48,
-            "ServerWatts": 420,
-            "TriggerTime": 1.5,
-            "ProcessorSetSize": 2
-        },
-        {
-            "EventId": "3",
-            "EventType": "Performance",
-            "TriggerTime": 1.5,
-            "PerformanceType": "Server",
-            "PerformanceJumpPercent": 88.6
-        },
-        {
-            "EventId": "4",
-            "EventType": "Configuration",
-            "ServerCost": 15000,
-            "ServerSize": 2,
-            "CoreSetSize": 64,
-            "ServerWatts": 450,
-            "TriggerTime": 3.5,
-            "ProcessorSetSize": 2
-        },
-        {
-            "EventId": "5",
-            "EventType": "Performance",
-            "TriggerTime": 3.5,
-            "PerformanceType": "Server",
-            "PerformanceJumpPercent": 66.7
-        }
-    ],
-    "EvolutionRules": {
-        "InventoryQueueBias": "Auto",
-        "ServiceDemandGrowthPercent": 25,
-        "PoolUtilizationPercentCurrent": 62.5,
-        "PoolUtilizationBoundaryPercentLower": 60,
-        "PoolUtilizationBoundaryPercentUpper": 65
-    },
-    "ValuationRules": {
-        "DiscountPercent": 6.5,
-        "InitialInventoryIsNew": false,
-        "IncludeServerResidualValue": true,
-        "ResidualValueBidAskSpreadPercent": 40
-    },
-    "ServerInventory": [
-        {
-            "ServerQty": 20,
-            "InitialAge": 4.8,
-            "ServerPerf": 100,
-            "ServerSize": 2,
-            "CoreSetSize": 8,
-            "ServerWatts": 425,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 20,
-            "InitialAge": 4.2,
-            "ServerPerf": 135,
-            "ServerSize": 2,
-            "CoreSetSize": 10,
-            "ServerWatts": 425,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 20,
-            "InitialAge": 3.6,
-            "ServerPerf": 150,
-            "ServerSize": 2,
-            "CoreSetSize": 12,
-            "ServerWatts": 425,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 22,
-            "InitialAge": 3.2,
-            "ServerPerf": 160,
-            "ServerSize": 2,
-            "CoreSetSize": 8,
-            "ServerWatts": 400,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 20,
-            "InitialAge": 2.6,
-            "ServerPerf": 240,
-            "ServerSize": 2,
-            "CoreSetSize": 12,
-            "ServerWatts": 400,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 16,
-            "InitialAge": 2,
-            "ServerPerf": 360,
-            "ServerSize": 2,
-            "CoreSetSize": 20,
-            "ServerWatts": 400,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 18,
-            "InitialAge": 1.4,
-            "ServerPerf": 430,
-            "ServerSize": 2,
-            "CoreSetSize": 24,
-            "ServerWatts": 400,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 20,
-            "InitialAge": 0.8,
-            "ServerPerf": 515,
-            "ServerSize": 2,
-            "CoreSetSize": 28,
-            "ServerWatts": 415,
-            "ProcessorSetSize": 2
-        },
-        {
-            "ServerQty": 18,
-            "InitialAge": 0.2,
-            "ServerPerf": 560,
-            "ServerSize": 2,
-            "CoreSetSize": 32,
-            "ServerWatts": 415,
-            "ProcessorSetSize": 2
-        }
-    ],
-    "SimulationRules": {
-        "SimulationType": "Optimal",
-        "ScenarioDuration": 6,
-        "SimulationCostScope": "All",
-        "FindSolutionByMetric": "TotalCumulativeCostPerYear",
-        "ServerReplacementTime": null
-    },
-    "SoftwareResources": {
-        "PoolSoftwareStack": [
-            1,
-            2
-        ],
-        "SoftwareInventoryTerms": [
-            {
-                "Fee": 2000,
-                "LicenseId": 1,
-                "ContractType": "Coterminous",
-                "LicenseClass": "Perpetual",
-                "ContractTerms": {
-                    "CostRules": [],
-                    "TermLength": 3,
-                    "AnniversaryDate": "2024-10-31",
-                    "RenewalSchedule": "Contract",
-                    "AttemptPositionReset": false,
-                    "CreateSettlementCalendar": "Union"
-                },
-                "LicenseMetric": "Processor",
-                "InitialPosition": null,
-                "PerpetualSupportPercent": 25
-            },
-            {
-                "Fee": 4000,
-                "LicenseId": 2,
-                "ContractType": "Coterminous",
-                "LicenseClass": "Subscription",
-                "ContractTerms": {
-                    "CostRules": [],
-                    "TermLength": 3,
-                    "TrueUpMonth": 6,
-                    "AnniversaryDate": "2025-03-31",
-                    "RenewalSchedule": "TrueUp",
-                    "AttemptPositionReset": false,
-                    "CreateSettlementCalendar": "Custom"
-                },
-                "LicenseMetric": "Processor",
-                "InitialPosition": null
-            },
-            {
-                "Fee": 500,
-                "LicenseId": 3,
-                "ContractType": "Instance",
-                "LicenseClass": "Subscription",
-                "LicenseMetric": "Processor"
-            }
-        ]
-    },
-    "PowerConsumptionTerms": {
-        "DatacenterPue": 1.4,
-        "PoolPowerDrawPercent": 80,
-        "PowerCostInflationPercent": 2.5,
-        "DatacenterPowerkWhCostRate": 0.115
-    },
-    "NewServerConfiguration": {
-        "ServerCost": 12000,
-        "ServerPerf": 560,
-        "ServerSize": 2,
-        "CoreSetSize": 32,
-        "ServerWatts": 415,
-        "ProcessorSetSize": 2
-    },
-    "FacilityConsumptionTerms": {
-        "FacilitySpaceUnitCost": 65,
-        "UnitCostInflationPercent": 2.75,
-        "PowerConsumptionMarkupPercent": 0
-    }
-} 
+Status Nbr:  2 
+Message:  Request started 
+Timestamp:  2025-04-10T16:29:57Z 
+
+Status Nbr:  3 
+Message:  Model validation succeeded 
+Timestamp:  2025-04-10T16:29:57Z 
+
+Status Nbr:  4 
+Message:  Request added to simulator queue 
+Timestamp:  2025-04-10T16:29:58Z 
+
+Status Nbr:  4 
+Message:  Request added to simulator queue 
+Timestamp:  2025-04-10T16:29:58Z 
+ 
+
+Status Nbr:  5 
+Message:  Simulator has started 
+Timestamp:  2025-04-10T16:30:04Z 
+ 
+
+Status Nbr:  6 
+Message:  Simulator is executing 
+Timestamp:  2025-04-10T16:30:06Z 
+ 
+
+Status Nbr:  6 
+Message:  Simulator is executing 
+Timestamp:  2025-04-10T16:30:10Z 
+ 
+
+Status Nbr:  6 
+Message:  Simulator is executing 
+Timestamp:  2025-04-10T16:30:12Z 
+ 
+
+Status Nbr:  6 
+Message:  Simulator is executing 
+Timestamp:  2025-04-10T16:30:16Z 
+ 
+
+Status Nbr:  6 
+Message:  Simulator is executing 
+Timestamp:  2025-04-10T16:30:20Z 
+ 
+
+Status Nbr:  7 
+Message:  Simulator completed 
+Timestamp:  2025-04-10T16:30:21Z 
+ 
+
+Http status code:  200 
 
 Save file success 
+
+da.nhywkyteocyu7ujrfpvdh 
+
+da.nhywkyteocyu7ujrfpvdh 
 
 End 
 
